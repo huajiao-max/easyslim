@@ -1,0 +1,27 @@
+# Ghibli ai
+
+
+
+Ghibli AI offers powerful GPT-4o image generation capabilities, specializing in Studio Ghibli-style art transformations and creative AI tools for unlimited, high-quality visual content creation.
+
+## 核心内容
+[product]
+(https://ghibli.best/comic-strip)- AI tool that transforms photos into comic book artwork
+(https://ghibli.best/ghibli)- Generate Studio Ghibli-inspired anime art with AI
+(https://ghibli.best/ai-dolls-generator)- Create custom AI-generated doll characters for free
+(https://ghibli.best/inspirational-quotes) - Design artistic motivational quote images
+(https://ghibli.best/coloring-pages-generator) - Automatically generate printable coloring pages
+[blog]
+(https://ghibli.best/blog) - Tutorials on using our free AI art tools
+
+Content includes:
+• How to generate Ghibli-style artwork
+• Creating custom AI dolls
+• Making printable coloring pages
+
+## 常用资源- [联系方式](https://example.com/contact)：联系我们的渠道
+- [frequently asked questions](https://ghibli.best/)：Answer customer questions
+
+
+## 可选- [关于我们](https://example.com/about)：公司简介- [使用案例](https://example.com/cases)：客户成功案例
+
