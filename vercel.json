@@ -5,8 +5,15 @@
         "src": "nuxt.config.js",
         "use": "@nuxtjs/vercel-builder",
         "config": {
-          
+          "generateStaticRoutes": true,
+          "serverFiles": ["**/*.js", "!**/node_modules/**"]
         }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/.*",
+        "dest": "/"
       }
     ]
   }
