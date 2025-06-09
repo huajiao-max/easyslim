@@ -1,4 +1,6 @@
 export default {
+  mode: "spa",
+  target: "static",
   modules: ["@nuxtjs/tailwindcss"],
   publicRuntimeConfig: {
     apiKey: process.env.API_KEY, // 仅在服务端可用
@@ -162,10 +164,12 @@ export default {
     transpile: [/^element-ui/],
     extractCSS: { allChunks: true },
     vendor: ["axios"], //为防止重复打包
+    // 生产环境优化
+    analyze: false,
+    extractCSS: true,
   },
 
-  // generate: {
-  //   fallback: true,
-  //   routes: ["/privacy"],
-  // },
+  generate: {
+    fallback: true,
+  },
 };
