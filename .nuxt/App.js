@@ -6,11 +6,11 @@ import NuxtError from './components/nuxt-error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
+import '..\\assets\\css\\tailwind.css'
+
 import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
 import '..\\assets\\base.css'
-
-import '..\\assets\\base.less'
 
 import '..\\assets\\theme.css'
 
@@ -104,6 +104,10 @@ export default {
 
     isFetching () {
       return this.nbFetching > 0
+    },
+
+    isPreview () {
+      return Boolean(this.$options.previewData)
     },
   },
 

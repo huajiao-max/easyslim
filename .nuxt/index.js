@@ -14,6 +14,9 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_00790749 from 'nuxt_plugin_plugin_00790749' // Source: .\\components\\plugin.js (mode: 'all')
+import nuxt_plugin_pluginutils_a1bef9fc from 'nuxt_plugin_pluginutils_a1bef9fc' // Source: .\\nuxt-i18n\\plugin.utils.js (mode: 'all')
+import nuxt_plugin_pluginrouting_1f0c57cd from 'nuxt_plugin_pluginrouting_1f0c57cd' // Source: .\\nuxt-i18n\\plugin.routing.js (mode: 'all')
+import nuxt_plugin_pluginmain_4a21227c from 'nuxt_plugin_pluginmain_4a21227c' // Source: .\\nuxt-i18n\\plugin.main.js (mode: 'all')
 import nuxt_plugin_axios_14d260ec from 'nuxt_plugin_axios_14d260ec' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_elementui_d905880e from 'nuxt_plugin_elementui_d905880e' // Source: ..\\plugins\\element-ui (mode: 'all')
 import nuxt_plugin_axios_2228ef02 from 'nuxt_plugin_axios_2228ef02' // Source: ..\\plugins\\axios (mode: 'client')
@@ -21,7 +24,6 @@ import nuxt_plugin_firebase_362e73fb from 'nuxt_plugin_firebase_362e73fb' // Sou
 import nuxt_plugin_error_225eb494 from 'nuxt_plugin_error_225eb494' // Source: ..\\plugins\\error (mode: 'client')
 import nuxt_plugin_googleanalytics_2e7ddd5e from 'nuxt_plugin_googleanalytics_2e7ddd5e' // Source: ..\\plugins\\google-analytics.js (mode: 'client')
 import nuxt_plugin_cors_d2cc8294 from 'nuxt_plugin_cors_d2cc8294' // Source: ..\\plugins\\cors.js (mode: 'client')
-import nuxt_plugin_i18n_66ff12a5 from 'nuxt_plugin_i18n_66ff12a5' // Source: ..\\plugins\\i18n.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -89,7 +91,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"Ghibli AI Generator | Turn Photos into Studio Ghibli Style","htmlAttrs":{"lang":"en"},"meta":[{"property":"og:title","content":"ghibli Generate"},{"property":"og:description","content":"Generate the pictures by text"},{"property":"og:type","content":"website"},{"property":"og:url","content":"http:\u002F\u002FGhibli ai\u002F"},{"property":"og:locale","content":"en_US"},{"property":"og:site_name","content":"ghibli"},{"property":"og:image","content":"\u002Fassets\u002Fimage\u002Fidea3.png"},{"name":"twitter:card","content":"summary"},{"name":"twitter:title","content":"ghibli Generate"},{"name":"twitter:description","content":"Generate the pictures by text"},{"name":"twitter:image","content":"\u002Fassets\u002Fimage\u002Fidea3.png"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"script":[{"async":true,"src":"https:\u002F\u002Fpagead2.googlesyndication.com\u002Fpagead\u002Fjs\u002Fadsbygoogle.js?client=2483469961","crossorigin":"anonymous"}],"__dangerouslyDisableSanitizers":["opengraph","twitter"],"style":[]},
+    head: {"title":"Ghibli AI Generator | Turn Photos into Studio Ghibli Style","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Transform your photos into stunning Studio Ghibli-style art with our AI generator."},{"name":"format-detection","content":"telephone=no"},{"httpEquiv":"Content-Type","content":"text\u002Fhtml;charset=gb2312"},{"name":"sogou_site_verification","content":"mXan3oISGM"},{"name":"msvalidate.01","content":"9C1DEA3D90ADA14FDB750F862CEF56E8"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"script":[{"async":true,"src":"https:\u002F\u002Fpagead2.googlesyndication.com\u002Fpagead\u002Fjs\u002Fadsbygoogle.js?client=2483469961","crossorigin":"anonymous"}],"style":[]},
 
     store,
     router,
@@ -223,6 +225,18 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_00790749(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_pluginutils_a1bef9fc === 'function') {
+    await nuxt_plugin_pluginutils_a1bef9fc(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_pluginrouting_1f0c57cd === 'function') {
+    await nuxt_plugin_pluginrouting_1f0c57cd(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_pluginmain_4a21227c === 'function') {
+    await nuxt_plugin_pluginmain_4a21227c(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_axios_14d260ec === 'function') {
     await nuxt_plugin_axios_14d260ec(app.context, inject)
   }
@@ -249,10 +263,6 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_cors_d2cc8294 === 'function') {
     await nuxt_plugin_cors_d2cc8294(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_i18n_66ff12a5 === 'function') {
-    await nuxt_plugin_i18n_66ff12a5(app.context, inject)
   }
 
   // Lock enablePreview in context

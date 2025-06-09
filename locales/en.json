@@ -1,0 +1,39 @@
+﻿{
+  "header": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "contact": "Contact"
+  },
+  "footer": {
+    "menuList": [
+      {
+        "title": "Home",
+        "name": "index",
+        "url": "/"
+      },
+      {
+        "title": "Features",
+        "name": "features",
+        "url": "/features"
+      },
+      {
+        "title": "Pricing",
+        "name": "pricing",
+        "url": "/pricing"
+      }
+    ],
+    "brand": {
+      "title": "Your Brand",
+      "description": "Brand description"
+    },
+    "copyright": "Copyright © {year} All Rights Reserved",
+    "agreement": {
+      "title": "User Agreement"
+    }
+  },
+  "heroData": {
+    "title": "Welcome",
+    "subtitle": "Subtitle text"
+  }
+}

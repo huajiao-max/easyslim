@@ -1,6 +1,7 @@
 <template>
   <div>
-    <hero-section :hero-data="$t('heroData')" />
+    <!-- <hero-section :hero-data="$t('heroData')" /> -->
+    <hero-section :hero-data="heroData" />
     <features-section :features="features" />
     <plans-section :plans="plans" />
     <tools-section :tools="tools" />
@@ -59,13 +60,13 @@ export default {
   },
   data() {
     return {
-      // heroData: {
-      //   title: "Transform Your Life with Simple Weight Loss Plans",
-      //   subtitle:
-      //     "Start your journey today with personalized diet plans, workout routines, and monthly tracking. No complicated rules, just results that last.",
-      //   ctaText: "Start Your Transformation →",
-      //   ctaLink: "#plans",
-      // },
+      heroData: {
+        title: "Transform Your Life with Simple Weight Loss Plans",
+        subtitle:
+          "Start your journey today with personalized diet plans, workout routines, and monthly tracking. No complicated rules, just results that last.",
+        ctaText: "Start Your Transformation →",
+        ctaLink: "#plans",
+      },
       features: [
         {
           icon: "🎯",

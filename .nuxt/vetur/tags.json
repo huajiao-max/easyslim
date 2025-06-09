@@ -31,32 +31,5 @@
   },
   "ToolsSection": {
     "description": "Auto imported from components/ToolsSection.vue"
-  },
-  "I18nHomeAr": {
-    "description": "Auto imported from components/i18n/home/ar.js"
-  },
-  "I18nHomeDe": {
-    "description": "Auto imported from components/i18n/home/de.js"
-  },
-  "I18nHomeEn": {
-    "description": "Auto imported from components/i18n/home/en.js"
-  },
-  "I18nHomeEs": {
-    "description": "Auto imported from components/i18n/home/es.js"
-  },
-  "I18nHomeFr": {
-    "description": "Auto imported from components/i18n/home/fr.js"
-  },
-  "I18nHomeJp": {
-    "description": "Auto imported from components/i18n/home/jp.js"
-  },
-  "I18nHomeKo": {
-    "description": "Auto imported from components/i18n/home/ko.js"
-  },
-  "I18nHomeMly": {
-    "description": "Auto imported from components/i18n/home/mly.js"
-  },
-  "I18nHomeZh": {
-    "description": "Auto imported from components/i18n/home/zh.js"
   }
 }

@@ -1,20 +1,41 @@
 [
   {
-    "name": "privacy-policy",
+    "name": "privacy-policy___en",
     "path": "/privacy-policy",
     "component": "D:\\\\mycode\\\\2025\\\\cursor\\\\month-plan-nuxt\\\\pages\\\\privacy-policy.vue",
     "chunkName": "pages/privacy-policy",
     "_name": "_b7388a96"
   },
   {
-    "name": "terms-conditions",
+    "name": "terms-conditions___en",
     "path": "/terms-conditions",
     "component": "D:\\\\mycode\\\\2025\\\\cursor\\\\month-plan-nuxt\\\\pages\\\\terms-conditions.vue",
     "chunkName": "pages/terms-conditions",
     "_name": "_2f2c115c"
   },
   {
-    "name": "index",
+    "name": "index___zh",
+    "path": "/zh",
+    "component": "D:\\\\mycode\\\\2025\\\\cursor\\\\month-plan-nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_a12969b8"
+  },
+  {
+    "name": "privacy-policy___zh",
+    "path": "/zh/privacy-policy",
+    "component": "D:\\\\mycode\\\\2025\\\\cursor\\\\month-plan-nuxt\\\\pages\\\\privacy-policy.vue",
+    "chunkName": "pages/privacy-policy",
+    "_name": "_b7388a96"
+  },
+  {
+    "name": "terms-conditions___zh",
+    "path": "/zh/terms-conditions",
+    "component": "D:\\\\mycode\\\\2025\\\\cursor\\\\month-plan-nuxt\\\\pages\\\\terms-conditions.vue",
+    "chunkName": "pages/terms-conditions",
+    "_name": "_2f2c115c"
+  },
+  {
+    "name": "index___en",
     "path": "/",
     "component": "D:\\\\mycode\\\\2025\\\\cursor\\\\month-plan-nuxt\\\\pages\\\\index.vue",
     "chunkName": "pages/index",

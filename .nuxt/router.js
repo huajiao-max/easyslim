@@ -22,15 +22,27 @@ export const routerOptions = {
   routes: [{
     path: "/privacy-policy",
     component: _b7388a96,
-    name: "privacy-policy"
+    name: "privacy-policy___en"
   }, {
     path: "/terms-conditions",
     component: _2f2c115c,
-    name: "terms-conditions"
+    name: "terms-conditions___en"
+  }, {
+    path: "/zh",
+    component: _a12969b8,
+    name: "index___zh"
+  }, {
+    path: "/zh/privacy-policy",
+    component: _b7388a96,
+    name: "privacy-policy___zh"
+  }, {
+    path: "/zh/terms-conditions",
+    component: _2f2c115c,
+    name: "terms-conditions___zh"
   }, {
     path: "/",
     component: _a12969b8,
-    name: "index"
+    name: "index___en"
   }],
 
   fallback: false

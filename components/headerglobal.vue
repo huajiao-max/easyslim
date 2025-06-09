@@ -49,7 +49,7 @@
           </div>
           <!-- 语言选择下拉组件 -->
 
-          <!-- <div class="right-coin" v-show="scrennVal == '4' || scrennVal == '3'">
+          <div class="right-coin" v-show="scrennVal == '4' || scrennVal == '3'">
             <el-select
               v-model="$i18n.locale"
               @change="changeLanguage"
@@ -62,7 +62,7 @@
                 :value="lang.value"
               ></el-option>
             </el-select>
-          </div> -->
+          </div>
 
           <div
             v-show="(scrennVal == '4' || scrennVal == '3') && !isAuthenticated"
@@ -376,33 +376,33 @@ export default {
     buildMenuList() {
       this.menuList = [
         {
-          title: "Home",
+          title: this.$t("header.home"),
           name: "index",
           url: "/",
           icon: "HiOutlineSparkles",
         },
         {
           title: "Ghibli",
-          url: "/ghibli",
           name: "ghibli",
+          url: "/ghibli",
           icon: "BiCube",
         },
         {
-          title: "Comic Strip",
-          url: "/comic-strip",
+          title: this.$t("header.features"),
           name: "comic-strip",
+          url: "/comic-strip",
           icon: "BiCube",
         },
         {
           title: "Blogs",
-          url: "/blog",
           name: "blog",
+          url: "/blog",
           icon: "MdPayment",
         },
         {
-          title: "Pricing",
-          url: "/pricing",
+          title: this.$t("header.pricing"),
           name: "pricing",
+          url: "/pricing",
           icon: "MdPayment",
         },
       ];
