@@ -3,13 +3,13 @@
     "builds": [
       {
          "src": "nuxt.config.js",
-      "use": "@nuxtjs/vercel-builder"
+      "use": "@nuxtjs/vercel-builder",
+      "serverFiles": ["server-middleware/**"]
       }
     ],
+     "nodeVersion": "16.20.0",
     "routes": [
-      {
-        "src": "/.*",
-        "dest": "/"
-      }
+      { "src": "/_nuxt/.+", "headers": { "Cache-Control": "public,max-age=31536000,immutable" } },
+    { "src": "/(.*)", "dest": "/" }
     ]
   }
