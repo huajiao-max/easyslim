@@ -11,5 +11,10 @@
     "routes": [
       { "src": "/_nuxt/.+", "headers": { "Cache-Control": "public,max-age=31536000,immutable" } },
     { "src": "/(.*)", "dest": "/" }
-    ]
+    ],
+    "functions": {
+    "api/**": {
+   
+      "excludeFiles": "{.nuxt,*.cache,node_modules,public,app}/**"
+    }}
   }
