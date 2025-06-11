@@ -5,7 +5,7 @@ Disallow: /admin/
 Disallow: /private/
 
 # 网站地图
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://easyslimstart.com/sitemap.xml
 
 # AI爬虫特定规则
 User-agent: GPTBot
