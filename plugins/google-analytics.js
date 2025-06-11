@@ -1,9 +1,8 @@
-/* ~/plugins/google-analytics.js */
-
-/* eslint-disable */
-
-export default ({ app }) => {
+export default defineNuxtPlugin((nuxtApp) => {
   if (process.env.NODE_ENV !== "production") return;
+
+  // Only run on client side
+  if (process.server) return;
 
   // 在页面载入前动态添加 Google Tag Manager 脚本
   const script = document.createElement("script");
@@ -20,4 +19,10 @@ export default ({ app }) => {
 
   // Google Analytics 配置
   gtag("config", "G-JHPC6MZH60");
-};
+
+  return {
+    provide: {
+      gtag: window.gtag,
+    },
+  };
+});

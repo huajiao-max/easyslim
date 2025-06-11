@@ -1,7 +1,8 @@
-import Vue from "vue";
-import Vuex from "vuex";
+// 该文件原为 Vuex 配置，已迁移至 Pinia。请使用 Pinia 进行状态管理。
+// import Vue from "vue";
+// import Vuex from "vuex";
 import { initUserPoints } from "../utils/points";
-import { auth, db } from "../plugins/firebase";
+// import { auth, db } from "../plugins/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 // 只在客户端检查auth
 if (process.client && !auth) {
@@ -9,7 +10,7 @@ if (process.client && !auth) {
     "Firebase Auth is not available - check if running on client side"
   );
 }
-Vue.use(Vuex);
+// Vue.use(Vuex);
 const store = () => {
   return new Vuex.Store({
     state: {

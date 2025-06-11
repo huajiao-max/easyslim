@@ -1,5 +1,8 @@
-export default {
-  target: "static",
+export default defineNuxtConfig({
+  devServer: {
+    port: 3001,
+  },
+  ssr: false,
   publicRuntimeConfig: {
     apiKey: process.env.API_KEY,
     apiBaseUrl: process.env.API_BASE_URL,
@@ -35,7 +38,7 @@ export default {
   },
 
   css: [
-    "element-ui/lib/theme-chalk/index.css",
+    "element-plus/dist/index.css",
     "@/assets/base.css",
     "@/assets/theme.css",
     "@/assets/css/tailwind.css",
@@ -53,45 +56,18 @@ export default {
   },
 
   plugins: [
-    "@/plugins/element-ui",
-    { src: "@/plugins/axios", ssr: false },
-    { src: "@/plugins/firebase", ssr: false },
-    { src: "@/plugins/error", ssr: false },
-    { src: "@/plugins/google-analytics.js", mode: "client" },
-    { src: "@/plugins/cors.js", ssr: false },
+    "~/plugins/axios",
+    "~/plugins/firebase",
+    "~/plugins/error",
+    "~/plugins/google-analytics",
+    "~/plugins/cors",
   ],
 
   components: true,
-  buildModules: [],
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/robots",
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/i18n",
-  ],
-
-  i18n: {
-    locales: [
-      { code: "en", name: "English" },
-      { code: "zh", name: "中文" },
-    ],
-    defaultLocale: "en",
-    vueI18n: {
-      fallbackLocale: "en",
-      messages: {
-        en: require("./locales/en.json"),
-        zh: require("./locales/zh.json"),
-      },
-    },
-  },
-
-  robots: {
-    UserAgent: "*",
-    Allow: "*",
-  },
+  modules: ["@nuxtjs/tailwindcss", "@element-plus/nuxt"],
 
   build: {
-    transpile: [/^element-ui/],
+    transpile: [/^element-plus/],
     optimization: {
       splitChunks: {
         chunks: "all",
@@ -116,4 +92,4 @@ export default {
   generate: {
     fallback: true,
   },
-};
+});

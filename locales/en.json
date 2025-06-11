@@ -24,12 +24,12 @@
       }
     ],
     "brand": {
-      "title": "Your Brand",
-      "description": "Brand description"
+      "title": "Ghibli AI",
+      "description": "Transform your photos into Ghibli style!"
     },
-    "copyright": "Copyright © {year} All Rights Reserved",
+    "copyright": "© 2025 Ghibli AI. All rights reserved.",
     "agreement": {
-      "title": "User Agreement"
+      "title": "Agreement"
     }
   },
   "heroData": {

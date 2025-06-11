@@ -1,1 +1,12 @@
-﻿{}
+﻿{
+    "footer": {
+        "brand": {
+            "title": "Ghibli AI",
+            "description": "将你的照片变成宫崎骏风格！"
+        },
+        "copyright": "© 2025 Ghibli AI. 保留所有权利。",
+        "agreement": {
+            "title": "用户协议"
+        }
+    }
+}

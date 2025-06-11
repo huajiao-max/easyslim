@@ -11,7 +11,7 @@
               @click="tohome"
               alt="easy slim"
             />
-            <!-- <h2 class="sidebar-title" @click="tohome">{{ $t("title") }}</h2> -->
+            <!-- <h2 class="sidebar-title" @click="tohome">Your Brand</h2> -->
           </div>
           <div class="right-logo" v-show="scrennVal == '1' || scrennVal == '2'">
             <img
@@ -34,34 +34,47 @@
               router
               class="menu"
             >
-              <template v-for="(item, index) in $t('footer.menuList')">
-                <el-menu-item
-                  :key="index"
-                  class="menu-item"
-                  @click="menuClick(item, index)"
-                >
-                  <template slot="title">
-                    <span>{{ item.title }}</span>
-                  </template>
-                </el-menu-item>
-              </template>
+              <el-menu-item
+                class="menu-item"
+                @click="menuClick(menuList[0], 0)"
+              >
+                <template slot="title">
+                  <span>Home</span>
+                </template>
+              </el-menu-item>
+              <el-menu-item
+                class="menu-item"
+                @click="menuClick(menuList[1], 1)"
+              >
+                <template slot="title">
+                  <span>Ghibli</span>
+                </template>
+              </el-menu-item>
+              <el-menu-item
+                class="menu-item"
+                @click="menuClick(menuList[2], 2)"
+              >
+                <template slot="title">
+                  <span>Comic Strip</span>
+                </template>
+              </el-menu-item>
+              <el-menu-item
+                class="menu-item"
+                @click="menuClick(menuList[3], 3)"
+              >
+                <template slot="title">
+                  <span>Blogs</span>
+                </template>
+              </el-menu-item>
+              <el-menu-item
+                class="menu-item"
+                @click="menuClick(menuList[4], 4)"
+              >
+                <template slot="title">
+                  <span>Pricing</span>
+                </template>
+              </el-menu-item>
             </el-menu>
-          </div>
-          <!-- 语言选择下拉组件 -->
-
-          <div class="right-coin" v-show="scrennVal == '4' || scrennVal == '3'">
-            <el-select
-              v-model="$i18n.locale"
-              @change="changeLanguage"
-              placeholder="Select Language"
-            >
-              <el-option
-                v-for="lang in availableLanguages"
-                :key="lang.value"
-                :label="lang.label"
-                :value="lang.value"
-              ></el-option>
-            </el-select>
           </div>
 
           <div
@@ -103,18 +116,31 @@
             router
             class="menu"
           >
-            <template v-for="(item, index) in $t('footer.menuList')">
-              <el-menu-item
-                :key="index"
-                :class="{ activeClass: activeIndex == index }"
-                class="menu-item"
-                @click="menuClick(item, index)"
-              >
-                <template slot="title">
-                  <span>{{ item.title }}</span>
-                </template>
-              </el-menu-item>
-            </template>
+            <el-menu-item class="menu-item" @click="menuClick(menuList[0], 0)">
+              <template slot="title">
+                <span>Home</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item class="menu-item" @click="menuClick(menuList[1], 1)">
+              <template slot="title">
+                <span>Ghibli</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item class="menu-item" @click="menuClick(menuList[2], 2)">
+              <template slot="title">
+                <span>Comic Strip</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item class="menu-item" @click="menuClick(menuList[3], 3)">
+              <template slot="title">
+                <span>Blogs</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item class="menu-item" @click="menuClick(menuList[4], 4)">
+              <template slot="title">
+                <span>Pricing</span>
+              </template>
+            </el-menu-item>
           </el-menu>
         </div>
 
@@ -145,15 +171,15 @@
             alt="moon"
           />
         </div>
-        <!-- <div class="right-login" @click="handleGoogleOut">
-          {{ userName }}
-        </div> -->
       </el-drawer>
     </client-only>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, watch } from "vue";
+import { useUserStore } from "@/store/user";
+import { useRouter, useRoute } from "vue-router";
 import logoImg from "@/assets/image/logo.png";
 import sun from "@/assets/image/sun.png";
 import moon from "@/assets/image/moon.png";
@@ -163,322 +189,47 @@ import {
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
-export default {
-  name: "App",
-  async asyncData({ params }) {
-    console.log(params, "params");
-  },
-  components: {},
-  props: {
-    message: {
-      type: String,
-      default: "",
-    },
-    isshowAiimage: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  provide() {
-    return { reload: this.reload };
-  },
 
-  data() {
-    return {
-      title: "Ghibli ai",
-      logo: logoImg,
-      // sun: sun,
-      // moon: moon,
-      activeIndex: 0,
-      showVideo: false,
-      activeMenu: "1",
-      collapse: true,
-      isMenu: true,
-      drawer: false,
-      direction: "rtl",
-      scrennVal: "1",
-      screenWidth: null,
-      googleloading: false,
-      loading: false,
-      menuList: [
-        {
-          title: "Home",
-          name: "index",
-          url: "/",
-          icon: "HiOutlineSparkles",
-        },
-        {
-          title: "Ghibli",
-          url: "/ghibli",
-          name: "ghibli",
-          icon: "BiCube",
-        },
-        {
-          title: "Comic Strip",
-          url: "/comic-strip",
-          name: "comic-strip",
-          icon: "BiCube",
-        },
-        {
-          title: "Blogs",
-          url: "/blog",
-          name: "blog",
-          icon: "MdPayment",
-        },
-        {
-          title: "Pricing",
-          url: "/pricing",
-          name: "pricing",
-          icon: "MdPayment",
-        },
-      ],
-      kedepayObj: {},
-      value: "",
-      availableLanguages: [
-        { value: "en", label: "English" },
-        { value: "zh", label: "中文" },
-        { value: "ar", label: "اللغة العربية" },
-        { value: "mly", label: "Bahasa Melayu" },
-        { value: "de", label: "Deutsch" },
-        { value: "fr", label: "Français" },
-        { value: "es", label: "Spanish" },
-        { value: "jp", label: "日本語" },
-        { value: "ko", label: "한국어" },
-      ],
-      isDarkTheme: true, // 默认主题为白色
-      sun: sun,
-      moon: moon,
-    };
-  },
-  computed: {
-    isCollapse() {
-      return !true;
-    },
-    menuBg() {
-      return "linear-gradient(292deg, #ffb7bb, #e67ad1 50%, #7471fb);";
-    },
-    isAuthenticated() {
-      return this.$store.state.isAuthenticated;
-    },
-    userName() {
-      return this.$store.state.userInfo.username;
-    },
-    countTimes() {
-      return this.$store.state.initCoin;
-    },
-    photoURL() {
-      return this.$store.state.userInfo.photoURL;
-    },
-  },
-  watch: {
-    "$route.name": {
-      handler(newValue, oldValue) {
-        if (newValue == "index") {
-          this.showVideo = true;
-        } else {
-          this.showVideo = false;
-        }
-        // this.buildMenuList();
-        const name = newValue;
-        let activeIndex = -1;
-        this.menuList.forEach((route, index) => {
-          if (route.name === name) {
-            activeIndex = index;
-            return;
-          }
-        });
-        this.activeIndex = activeIndex >= 0 ? activeIndex : this.activeIndex;
-      },
-      immediate: true,
-      deep: true,
-    },
-    isAuthenticated: {
-      handler(newVal) {
-        // this.buildMenuList();
-      },
-      immediate: true,
-      deep: true,
-    },
-  },
-  mounted() {
-    // this.buildMenuList();
-    this.getInit();
-    if (process.client) {
-      this.screenWidth = window.screen.width;
-      this.setScreen();
-      window.addEventListener("resize", this.handleResize);
-      this.$once("hook:beforeDestroy", () => {
-        window.removeEventListener("resize", this.handleResize);
-      });
-      this.$nextTick(() => {
-        const appElement = document.getElementById("app"); // 获取 ID 为 app 的元素
-        appElement.classList.add("white-theme"); // 添加白色主题类
-      });
-    }
-  },
-  created() {
-    this.$store.dispatch("InitUser");
-  },
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
 
-  methods: {
-    toggleTheme(flag) {
-      this.isDarkTheme = flag;
-      const appElement = document.getElementById("app"); // 获取 ID 为 app 的元素
-      if (appElement) {
-        if (flag == false) {
-          appElement.classList.add("dark-theme"); // 添加黑色主题类
-          appElement.classList.remove("white-theme"); // 移除白色主题类
-        } else {
-          appElement.classList.remove("dark-theme"); // 移除黑色主题类
-          appElement.classList.add("white-theme"); // 添加白色主题类
-        }
-      }
-      this.$emit("changeTheme", flag);
-    },
-    genetator(item) {
-      this.$router.push(item.url);
-    },
-    handleResize() {
-      this.screenWidth = window.screen.width;
-      this.setScreen();
-    },
-    setScreen() {
-      if (this.screenWidth < 1500 && this.screenWidth > 1000) {
-        this.scrennVal = "3";
-      } else if (this.screenWidth <= 1000 && this.screenWidth > 768) {
-        this.scrennVal = "2";
-      } else if (this.screenWidth <= 768 && this.screenWidth > 300) {
-        this.scrennVal = "1";
-      } else {
-        this.scrennVal = "4";
-      }
-    },
-    handleClose(done) {
-      done();
-    },
-    toggle() {
-      this.drawer = true;
-    },
-    getInit() {
-      if (process.client) {
-        window.KODEPAY_APPLICATION_ID = "b2d2d9aa-e2d7-11ee-aef8-1e54e735e3c4";
-        window.KODEPAY_CLIENT_ID = "3fbb457c-fa4e-11ee-a74a-8a74d5f627ee";
-        window.KODEPAY_ENV = "production";
-        (function () {
-          const s = document.createElement("script");
-          s.src =
-            "https://kodepay-global.zingfront.com/common/kodepay-website.js";
-          s.async = 1;
-          document.head.appendChild(s);
-        })();
-      }
-    },
-    buildMenuList() {
-      this.menuList = [
-        {
-          title: this.$t("header.home"),
-          name: "index",
-          url: "/",
-          icon: "HiOutlineSparkles",
-        },
-        {
-          title: "Ghibli",
-          name: "ghibli",
-          url: "/ghibli",
-          icon: "BiCube",
-        },
-        {
-          title: this.$t("header.features"),
-          name: "comic-strip",
-          url: "/comic-strip",
-          icon: "BiCube",
-        },
-        {
-          title: "Blogs",
-          name: "blog",
-          url: "/blog",
-          icon: "MdPayment",
-        },
-        {
-          title: this.$t("header.pricing"),
-          name: "pricing",
-          url: "/pricing",
-          icon: "MdPayment",
-        },
-      ];
-    },
-    tohome() {
-      this.$router.push({ name: "index" });
-    },
-    menuClick(item, index) {
-      this.activeIndex = index;
-      this.$router.push({ name: item.name });
-    },
-    changeLanguage(lang) {
-      this.$i18n.locale = lang;
-      localStorage.setItem("locale", lang);
-      this.$nextTick(() => {
-        // 保持当前主题状态
-        const appElement = document.getElementById("app");
-        if (appElement) {
-          if (this.isDarkTheme) {
-            appElement.classList.remove("dark-theme");
-            appElement.classList.add("white-theme");
-          } else {
-            appElement.classList.remove("white-theme");
-            appElement.classList.add("dark-theme");
-          }
-        }
-      });
-    },
-
-    handleGoogleOut() {
-      if (process.client) {
-        this.$confirm("Do you want to log out??", "tip", {
-          confirmButtonText: "confirm",
-          cancelButtonText: "cancel",
-          type: "warning",
+const logo = ref(logoImg);
+const activeIndex = ref(0);
+function handleGoogleOut() {
+  if (process.client) {
+    if (confirm("Do you want to log out?")) {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          userStore.logOut();
+          alert("logout successful!");
         })
-          .then(() => {
-            const auth = getAuth();
-            signOut(auth)
-              .then(() => {
-                this.$store.dispatch("LogOut");
-                this.$message({
-                  type: "success",
-                  message: "logout successful!",
-                });
-              })
-              .catch((error) => {
-                console.log(error, "error");
-              });
-          })
-          .catch((err) => {
-            console.log(err, "err");
-          });
-      }
-    },
-    async handleGoogleLogin() {
-      if (process.client) {
-        this.googleloading = true;
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
-        await window.focus();
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            this.googleloading = false;
-            const user = result.user.reloadUserInfo;
-            this.$store.dispatch("Login", user);
-          })
-          .catch((error) => {
-            console.log(error, "error---");
-            this.$message.warning("login failed");
-            this.googleloading = false;
-          });
-      }
-    },
-  },
-};
+        .catch((error) => {
+          console.log(error, "error");
+        });
+    }
+  }
+}
+async function handleGoogleLogin() {
+  if (process.client) {
+    googleloading.value = true;
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    await window.focus();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        googleloading.value = false;
+        const user = result.user.reloadUserInfo;
+        userStore.login(user);
+      })
+      .catch((error) => {
+        console.log(error, "error---");
+        alert("login failed");
+        googleloading.value = false;
+      });
+  }
+}
 </script>
 
 <style lang="less" scoped>
