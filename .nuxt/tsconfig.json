@@ -110,13 +110,13 @@
         "./imports"
       ],
       "#tailwindcss": [
-        "./tailwind"
+        "./tailwind.css"
       ],
       "#tailwindcss/sources": [
-        "./tailwindcss/sources"
+        "./tailwindcss/sources.css"
       ],
       "#app-manifest": [
-        "./manifest/meta/dev"
+        "./manifest/meta/f5a68438-8e8a-4b5a-ba6e-9abfad42a689.json"
       ],
       "#components": [
         "./components"
