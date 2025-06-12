@@ -5,6 +5,14 @@ export default defineNuxtConfig({
     port: 3001,
   },
   ssr: false,
+  app: {
+    baseURL: "/",
+    buildAssetsDir: "/_nuxt/",
+  },
+  nitro: {
+    preset: "vercel",
+    serveStatic: true,
+  },
   publicRuntimeConfig: {
     apiKey: process.env.API_KEY,
     apiBaseUrl: process.env.API_BASE_URL,
