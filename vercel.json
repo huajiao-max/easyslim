@@ -1,15 +1,20 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": ".output/server/index.mjs",
-      "use": "@vercel/node"
+  "version": 3,
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
     }
-  ],
+  },
   "routes": [
     {
-      "src": "/.*",
-      "dest": ".output/server/index.mjs"
+      "src": "/_nuxt/.+",
+      "headers": {
+        "Cache-Control": "public,max-age=31536000,immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
