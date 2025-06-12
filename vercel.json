@@ -1,20 +1,15 @@
 {
-  "version": 3,
-  "build": {
-    "env": {
-      "NODE_VERSION": "18.x"
+  "version": 2,
+  "builds": [
+    {
+      "src": ".output/server/index.mjs",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/",
-      "headers": {
-        "Cache-Control": "public, max-age=0, must-revalidate"
-      }
+      "src": "/.*",
+      "dest": ".output/server/index.mjs"
     }
   ]
 }
