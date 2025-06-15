@@ -5,80 +5,14 @@
         <div class="sidebar-logo-link">
           <div class="left-logo">
             <img
-              v-show="scrennVal == '4' || scrennVal == '3'"
               :src="logo"
               class="sidebar-logo"
               @click="tohome"
               alt="easy slim"
             />
-            <!-- <h2 class="sidebar-title" @click="tohome">Your Brand</h2> -->
+            <h2 class="sidebar-title" @click="tohome">Easy Slim Planner</h2>
           </div>
-          <div class="right-logo" v-show="scrennVal == '1' || scrennVal == '2'">
-            <img
-              src="@/assets/image/logo.png"
-              class="right-icon"
-              @click="toggle"
-              alt="menu"
-            />
-          </div>
-          <div class="box" v-show="scrennVal == '4' || scrennVal == '3'">
-            <el-menu
-              :default-active="activeMenu"
-              :collapse="isCollapse"
-              :background-color="menuBg"
-              text-color="#fff"
-              :unique-opened="true"
-              active-text-color="#ff4493"
-              :collapse-transition="false"
-              mode="horizontal"
-              router
-              class="menu"
-            >
-              <el-menu-item
-                class="menu-item"
-                @click="menuClick(menuList[0], 0)"
-              >
-                <template slot="title">
-                  <span>Home</span>
-                </template>
-              </el-menu-item>
-              <el-menu-item
-                class="menu-item"
-                @click="menuClick(menuList[1], 1)"
-              >
-                <template slot="title">
-                  <span>Ghibli</span>
-                </template>
-              </el-menu-item>
-              <el-menu-item
-                class="menu-item"
-                @click="menuClick(menuList[2], 2)"
-              >
-                <template slot="title">
-                  <span>Comic Strip</span>
-                </template>
-              </el-menu-item>
-              <el-menu-item
-                class="menu-item"
-                @click="menuClick(menuList[3], 3)"
-              >
-                <template slot="title">
-                  <span>Blogs</span>
-                </template>
-              </el-menu-item>
-              <el-menu-item
-                class="menu-item"
-                @click="menuClick(menuList[4], 4)"
-              >
-                <template slot="title">
-                  <span>Pricing</span>
-                </template>
-              </el-menu-item>
-            </el-menu>
-          </div>
-
           <div
-            v-show="(scrennVal == '4' || scrennVal == '3') && !isAuthenticated"
             class="right-login"
             @click="handleGoogleLogin"
             v-loading.fullscreen.lock="googleloading"
@@ -99,79 +33,6 @@
           </div>
         </div>
       </div>
-      <el-drawer
-        class="drawer"
-        title="menu"
-        :visible.sync="drawer"
-        :direction="direction"
-        :before-close="handleClose"
-      >
-        <div class="box-mobile">
-          <el-menu
-            :collapse="isCollapse"
-            :background-color="menuBg"
-            text-color="#fff"
-            :unique-opened="true"
-            :collapse-transition="false"
-            router
-            class="menu"
-          >
-            <el-menu-item class="menu-item" @click="menuClick(menuList[0], 0)">
-              <template slot="title">
-                <span>Home</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item class="menu-item" @click="menuClick(menuList[1], 1)">
-              <template slot="title">
-                <span>Ghibli</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item class="menu-item" @click="menuClick(menuList[2], 2)">
-              <template slot="title">
-                <span>Comic Strip</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item class="menu-item" @click="menuClick(menuList[3], 3)">
-              <template slot="title">
-                <span>Blogs</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item class="menu-item" @click="menuClick(menuList[4], 4)">
-              <template slot="title">
-                <span>Pricing</span>
-              </template>
-            </el-menu-item>
-          </el-menu>
-        </div>
-
-        <div
-          v-show="!photoURL"
-          class="right-login"
-          @click="handleGoogleLogin"
-          v-loading.fullscreen.lock="googleloading"
-        >
-          login
-        </div>
-        <div class="right-login" @click="handleGoogleOut">
-          <img :src="photoURL" alt="" />
-        </div>
-        <div class="buttonclass">
-          <img
-            v-if="isDarkTheme"
-            @click="toggleTheme(false)"
-            :src="sun"
-            class="sidebar-logo"
-            alt="sun"
-          />
-          <img
-            v-if="!isDarkTheme"
-            :src="moon"
-            class="sidebar-logo"
-            @click="toggleTheme(true)"
-            alt="moon"
-          />
-        </div>
-      </el-drawer>
     </client-only>
   </div>
 </template>
@@ -180,6 +41,7 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { useUserStore } from "@/store/user";
 import { useRouter, useRoute } from "vue-router";
+import { ElMessage, ElMessageBox } from "element-plus";
 import logoImg from "@/assets/image/logo.png";
 import sun from "@/assets/image/sun.png";
 import moon from "@/assets/image/moon.png";
@@ -193,24 +55,29 @@ import {
 const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
-
+const googleloading = ref(false);
 const logo = ref(logoImg);
 const activeIndex = ref(0);
-function handleGoogleOut() {
+async function handleGoogleOut() {
   if (process.client) {
-    if (confirm("Do you want to log out?")) {
+    try {
+      await ElMessageBox.confirm("Do you want to log out?", "Confirm Logout", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "warning",
+      });
       const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          userStore.logOut();
-          alert("logout successful!");
-        })
-        .catch((error) => {
-          console.log(error, "error");
-        });
+      await signOut(auth);
+      userStore.logOut();
+      ElMessage.success("Logout successful!");
+    } catch (error) {
+      if (error !== "cancel") {
+        console.log(error, "error");
+      }
     }
   }
 }
+const photoURL = ref("");
 async function handleGoogleLogin() {
   if (process.client) {
     googleloading.value = true;
@@ -219,16 +86,23 @@ async function handleGoogleLogin() {
     await window.focus();
     signInWithPopup(auth, provider)
       .then((result) => {
+        console.log(result, "result--success");
+
         googleloading.value = false;
         const user = result.user.reloadUserInfo;
+        photoURL.value = user.photoURL;
         userStore.login(user);
       })
       .catch((error) => {
         console.log(error, "error---");
-        alert("login failed");
+        ElMessage.error("Login failed");
         googleloading.value = false;
       });
   }
+}
+
+function tohome() {
+  router.push("/");
 }
 </script>
 
@@ -298,16 +172,22 @@ body {
     padding: 0.5rem 1rem;
     box-sizing: border-box;
     transition: all 0.3s ease;
-
+    color: #fff;
     & .left-logo {
       display: flex;
       align-items: center;
-      min-width: 150px;
+      min-width: 230px;
+      img {
+        border-radius: 5px;
+      }
     }
 
     & .sidebar-logo {
       transition: all 0.3s ease;
       vertical-align: middle;
+      img {
+        border-radius: 5px;
+      }
     }
 
     & .sidebar-title {
@@ -323,7 +203,7 @@ body {
   /* 超小屏幕 (<576px) */
   @media (max-width: 576px) {
     .left-logo {
-      width: 150px;
+      width: 230px;
       display: flex;
       align-items: center;
     }
@@ -394,7 +274,7 @@ body {
   /* 小屏幕 (576-768px) */
   @media (min-width: 576px) and (max-width: 768px) {
     .left-logo {
-      width: 150px;
+      width: 230px;
       display: flex;
       align-items: center;
     }
@@ -454,7 +334,7 @@ body {
   /* 中等屏幕 (768-992px) */
   @media (min-width: 768px) and (max-width: 992px) {
     .left-logo {
-      width: 150px;
+      width: 230px;
       display: flex;
       align-items: center;
     }
@@ -513,10 +393,10 @@ body {
     }
   }
 
-  /* 大屏幕 (992-1200px) */
-  @media (min-width: 992px) and (max-width: 1200px) {
+  /* 大屏幕 (992-1230px) */
+  @media (min-width: 992px) and (max-width: 1230px) {
     .left-logo {
-      width: 150px;
+      width: 230px;
       display: flex;
       align-items: center;
     }
@@ -563,7 +443,7 @@ body {
     .sidebar-title {
       font-size: 1.375rem;
       line-height: 54px;
-      max-width: 140px;
+      max-width: 180px;
     }
 
     .box {
@@ -589,8 +469,8 @@ body {
     }
   }
 
-  /* 超大屏幕 (>1200px) */
-  @media (min-width: 1200px) {
+  /* 超大屏幕 (>1230px) */
+  @media (min-width: 1230px) {
     .left-logo {
       width: 286px;
       display: flex;
@@ -639,7 +519,7 @@ body {
     .sidebar-title {
       font-size: 1.5rem;
       line-height: 56px;
-      max-width: 150px;
+      max-width: 230px;
     }
 
     .box {
@@ -691,6 +571,7 @@ body {
   height: 40px;
   line-height: 40px;
   z-index: 10;
+  text-align: center;
   float: right;
   min-width: 80px;
   margin-top: 5px;

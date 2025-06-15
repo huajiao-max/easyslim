@@ -37,7 +37,7 @@
       <ul>
         <li>
           2.1. For any inquiries or support related to our services, please
-          contact us via email at support@easyslimstart.com. Our team is
+          contact us via email at monica@easyslimstart.com. Our team is
           available to assist with any questions or issues you may have,
           ensuring a prompt and satisfactory resolution.
         </li>

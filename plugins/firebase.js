@@ -3,7 +3,11 @@ import { initializeApp } from "firebase/app";
 import "firebase/analytics";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  enableIndexedDbPersistence,
+} from "firebase/firestore";
 
 export default defineNuxtPlugin((nuxtApp) => {
   // TODO: Add SDKs for Firebase products that you want to use
@@ -60,6 +64,17 @@ export default defineNuxtPlugin((nuxtApp) => {
     auth = getAuth(app);
     db = getFirestore(app);
     usersCollection = collection(db, "users");
+
+    // Enable offline persistence
+    enableIndexedDbPersistence(db).catch((err) => {
+      if (err.code == "failed-precondition") {
+        console.log("Offline persistence already enabled");
+        window.location.reload(true); // 强制刷新页面
+      } else if (err.code == "unimplemented") {
+        console.log("Offline persistence not available");
+      }
+    });
+
     // Load analytics only on client
     import("firebase/analytics").then(({ getAnalytics }) => {
       getAnalytics(app);

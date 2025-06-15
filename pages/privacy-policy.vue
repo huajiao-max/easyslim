@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="main-box">
     <HeaderGlobal :isshowAiimage="false"></HeaderGlobal>
 
     <div class="p-6 prose mx-auto div-markdown-color">
@@ -90,7 +90,7 @@
       <h2>8. Contact Us</h2>
       <p>
         If you have any questions or concerns about our privacy policy or the
-        data we hold about you, please contact us at privacy@easyslimstart.com.
+        data we hold about you, please contact us at monica@easyslimstart.com.
       </p>
 
       <p>Thank you for choosing EasySlimStart for your weight loss journey.</p>

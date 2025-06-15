@@ -2,9 +2,9 @@
   <div class="box">
     <div class="flex">
       <div>
-        <p class="text footerlogo">Your Brand</p>
+        <p class="text footerlogo">Easy Slim Start</p>
         <p class="text footertitle">
-          Transform your photos into stunning Studio Ghibli-style art
+          Easy Slim Planner | Simple Weight Loss Plans That Actually Work
         </p>
         <p class="text footertitle">© 2025 All Rights Reserved</p>
       </div>
@@ -25,6 +25,8 @@
 <style scoped lang="less">
 .box {
   margin-top: 10rem;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 .flex {
   display: flex;

@@ -1,4 +1,5 @@
 <template>
+  <!-- 选择你的减肥计划 -->
   <section class="plans" id="plans">
     <div class="container">
       <h2 class="section-title" style="color: white">
@@ -73,7 +74,7 @@
             :key="day.key"
             class="calendar-day"
             :class="{ completed: day.completed, empty: day.empty }"
-            @click="!day.empty && toggleDay(day)"
+            @click="toggleDay(day)"
           >
             <div v-if="!day.empty" class="day-number">{{ day.day }}</div>
             <div v-if="!day.empty" class="day-emoji">
@@ -86,17 +87,15 @@
 
     <el-dialog
       title=""
-      :visible.sync="dialogVisible"
+      v-model="dialogVisible"
       width="50%"
       :before-close="dialogBeforeClose"
     >
       <div>
         <!-- Exercise Plan Modal modal-overlay-->
-        <div class="" v-if="activeModal === 'exercise'" @click="closeModal">
+        <div class="" v-if="activeModal === 'exercise'">
           <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal">×</button>
             <h3>🏃‍♀️ Create Exercise Plan</h3>
-
             <div class="inspiration-text">
               <p><strong>💡 Gentle Reminder:</strong></p>
               <p>
@@ -186,11 +185,9 @@
           </div>
         </div>
         <!-- Diet Plan Modal modal-overlay-->
-        <div class="" v-if="activeModal === 'diet'" @click="closeModal">
+        <div class="" v-if="activeModal === 'diet'">
           <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal">×</button>
             <h3>🍽️ Create Diet Plan</h3>
-
             <div class="inspiration-text">
               <p><strong>💡 Diet Tips:</strong></p>
               <p>
@@ -303,11 +300,9 @@
         </div>
         <!-- Combined Plan Modal modal-overlay-->
 
-        <div class="" v-if="activeModal === 'combined'" @click="closeModal">
+        <div class="" v-if="activeModal === 'combined'">
           <div class="modal-content large-modal" @click.stop>
-            <button class="modal-close" @click="closeModal">×</button>
             <h3>💫 Create Combined Plan</h3>
-
             <div class="inspiration-text">
               <p><strong>💡 Combined Plan Tips:</strong></p>
               <p>
@@ -448,6 +443,7 @@
 </template>
 
 <script>
+import { ElMessage, ElMessageBox } from "element-plus";
 export default {
   data() {
     return {
@@ -536,7 +532,7 @@ export default {
       },
 
       savedPlans: [],
-      completedDays: [],
+      completedDays: {}, // Now an object with plan IDs as keys
       dialogVisible: false,
     };
   },
@@ -559,10 +555,15 @@ export default {
       // Add days of the current month
       for (let day = 1; day <= daysInMonth; day++) {
         const dateKey = `${currentYear}-${currentMonth + 1}-${day}`;
+        const planId = this.currentPlan?.id;
+        const completed = planId
+          ? this.completedDays[planId]?.includes(dateKey) || false
+          : false;
+
         days.push({
           day,
           key: dateKey,
-          completed: this.completedDays.includes(dateKey),
+          completed,
           empty: false,
         });
       }
@@ -577,19 +578,14 @@ export default {
 
   methods: {
     openPlanModal(type) {
-      console.log(type, "type--001");
       this.dialogVisible = true;
       this.activeModal = type;
       this.planName = "";
       this.resetCurrentConfig();
-      document.body.style.overflow = "hidden";
+      // document.body.style.overflow = "hidden";
     },
     dialogBeforeClose() {
       this.dialogVisible = false;
-    },
-    closeModal() {
-      this.activeModal = null;
-      document.body.style.overflow = "auto";
     },
 
     resetCurrentConfig() {
@@ -648,13 +644,13 @@ export default {
         this.exerciseDurations.sort((a, b) => a - b);
         this.newExerciseDuration = null;
       } else if (value > 120) {
-        alert("Exercise duration cannot exceed 2 hours! 😊");
+        ElMessage.warning("Exercise duration cannot exceed 2 hours! 😊");
       }
     },
 
     saveExercisePlan() {
       if (!this.planName.trim()) {
-        alert("Please give your plan a name! 🌸");
+        ElMessage.warning("Please give your plan a name! 🌸");
         return;
       }
 
@@ -662,7 +658,7 @@ export default {
         !this.currentConfig.exerciseType ||
         !this.currentConfig.exerciseDuration
       ) {
-        alert("Please select exercise type and duration! 💕");
+        ElMessage.warning("Please select exercise type and duration! 💕");
         return;
       }
 
@@ -680,18 +676,20 @@ export default {
       this.savedPlans.push(planData);
       this.savePlansToStorage();
 
-      alert(`Exercise plan "${this.planName}" saved successfully! 🎉`);
-      this.closeModal();
+      ElMessage.success(
+        `Exercise plan "${this.planName}" saved successfully! 🎉`
+      );
+      this.dialogVisible = false;
     },
 
     saveDietPlan() {
       if (!this.planName.trim()) {
-        alert("Please give your plan a name! 🌸");
+        ElMessage.warning("Please give your plan a name! 🌸");
         return;
       }
 
       if (Object.keys(this.currentConfig.mealConfigs).length === 0) {
-        alert("Please configure at least one meal! 💕");
+        ElMessage.warning("Please configure at least one meal! 💕");
         return;
       }
 
@@ -708,13 +706,12 @@ export default {
       this.savedPlans.push(planData);
       this.savePlansToStorage();
 
-      alert(`Diet plan "${this.planName}" saved successfully! 🎉`);
-      this.closeModal();
+      ElMessage.success(`Diet plan "${this.planName}" saved successfully! 🎉`);
     },
 
     saveCombinedPlan() {
       if (!this.planName.trim()) {
-        alert("Please give your plan a name! 🌸");
+        ElMessage.warning("Please give your plan a name! 🌸");
         return;
       }
 
@@ -723,7 +720,9 @@ export default {
         !this.currentConfig.exerciseDuration ||
         Object.keys(this.currentConfig.mealConfigs).length === 0
       ) {
-        alert("Please complete both exercise and diet configurations! 💕");
+        ElMessage.warning(
+          "Please complete both exercise and diet configurations! 💕"
+        );
         return;
       }
 
@@ -742,35 +741,63 @@ export default {
       this.savedPlans.push(planData);
       this.savePlansToStorage();
 
-      alert(`Combined plan "${this.planName}" saved successfully! 🎉`);
-      this.closeModal();
+      ElMessage.success(
+        `Combined plan "${this.planName}" saved successfully! 🎉`
+      );
     },
 
     startPlan(planId) {
+      console.log(planId, "planId");
+
       this.currentPlan = this.savedPlans.find((plan) => plan.id === planId);
       if (!this.currentPlan) return;
+      console.log(this.currentPlan, " this.currentPlan");
 
+      // Force calendar refresh by toggling showTracking
       this.showTracking = true;
       this.$nextTick(() => {
         this.$refs.calendar?.scrollIntoView({ behavior: "smooth" });
       });
     },
 
-    deletePlan(planId) {
-      if (confirm("Are you sure you want to delete this plan?")) {
+    async deletePlan(planId) {
+      try {
+        await ElMessageBox.confirm(
+          "Are you sure you want to delete this plan?",
+          "Confirm Delete",
+          {
+            confirmButtonText: "Delete",
+            cancelButtonText: "Cancel",
+            type: "warning",
+          }
+        );
+
         this.savedPlans = this.savedPlans.filter((plan) => plan.id !== planId);
         this.savePlansToStorage();
+        ElMessage.success("Plan deleted successfully");
+      } catch {
+        // User cancelled deletion
       }
     },
 
     toggleDay(day) {
-      const index = this.completedDays.indexOf(day.key);
+      if (!this.currentPlan || day.empty) return;
+
+      const planId = this.currentPlan.id;
+      if (!this.completedDays[planId]) {
+        this.completedDays[planId] = [];
+      }
+
+      const index = this.completedDays[planId].indexOf(day.key);
       if (index > -1) {
-        this.completedDays.splice(index, 1);
+        this.completedDays[planId].splice(index, 1);
       } else {
-        this.completedDays.push(day.key);
+        this.completedDays[planId].push(day.key);
       }
       this.saveCompletedDaysToStorage();
+
+      // Force UI update
+      this.$forceUpdate();
     },
 
     getPlanTypeText(type) {
@@ -818,9 +845,8 @@ export default {
         this.savedPlans = JSON.parse(
           localStorage.getItem("weightLossPlans") || "[]"
         );
-        this.completedDays = JSON.parse(
-          localStorage.getItem("completedDays") || "[]"
-        );
+        const savedDays = localStorage.getItem("completedDays");
+        this.completedDays = savedDays ? JSON.parse(savedDays) : {};
       }
     },
   },
@@ -1437,6 +1463,7 @@ export default {
 .calendar-day.completed {
   background: #00b894;
   border-color: #00b894;
+  animation: pulse 0.5s ease;
 }
 
 .calendar-day.completed::after {
@@ -1446,6 +1473,18 @@ export default {
   right: 5px;
   font-size: 16px;
   color: white;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .emoji {
@@ -1490,6 +1529,198 @@ export default {
   .modal {
     width: 95%;
     padding: 20px;
+  }
+}
+.saved-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 计划卡片样式 */
+.saved-plan-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(116, 235, 213, 0.15),
+    0 2px 8px rgba(172, 182, 229, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片悬停效果 */
+.saved-plan-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(116, 235, 213, 0.25),
+    0 8px 16px rgba(172, 182, 229, 0.15);
+  border-color: rgba(116, 235, 213, 0.3);
+}
+
+/* 卡片背景装饰 */
+.saved-plan-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #74ebd5, #acb6e5);
+  border-radius: 16px 16px 0 0;
+}
+
+/* 标题样式 */
+.saved-plan-card h4 {
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  line-height: 1.4;
+}
+
+/* 描述文本样式 */
+.saved-plan-card p {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.saved-plan-card p:last-of-type {
+  margin-bottom: 20px;
+}
+
+.saved-plan-card p strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* 按钮容器 */
+.plan-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+/* 按钮基础样式 */
+.plan-actions button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Start Plan 按钮 */
+.start-btn {
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(116, 235, 213, 0.4),
+    0 4px 12px rgba(172, 182, 229, 0.3);
+}
+
+.start-btn:active {
+  transform: translateY(0);
+}
+
+/* Delete 按钮 */
+.delete-btn {
+  background: rgba(255, 255, 255, 0.8);
+  color: #e53e3e;
+  border: 2px solid rgba(229, 62, 62, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.delete-btn:hover {
+  background: rgba(229, 62, 62, 0.1);
+  border-color: rgba(229, 62, 62, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(229, 62, 62, 0.2);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .saved-plans-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .saved-plan-card {
+    padding: 20px;
+  }
+
+  .plan-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .plan-actions button {
+    padding: 12px 16px;
+  }
+}
+
+/* 空状态样式（可选） */
+.saved-plans-grid:empty::after {
+  content: "No saved plans yet";
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #718096;
+  font-style: italic;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+/* 加载动画（可选） */
+.saved-plan-card.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.saved-plan-card.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
   }
 }
 </style>

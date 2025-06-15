@@ -1,4 +1,5 @@
 <template>
+  <!--为什么选择我们的减肥计划？  -->
   <section class="features">
     <div class="container">
       <h2 class="section-title" style="color: #333">

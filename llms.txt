@@ -1,8 +1,8 @@
-# Ghibli ai
+# Easy Slim Planner
 
 
 
-Ghibli AI offers powerful GPT-4o image generation capabilities, specializing in Studio Ghibli-style art transformations and creative AI tools for unlimited, high-quality visual content creation.
+Easy Slim Planner | Simple Weight Loss Plans That Actually Work
 
 ## 核心内容
 [product]

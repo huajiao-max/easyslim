@@ -1,4 +1,5 @@
 <template>
+  <!-- 免费减肥工具 -->
   <section class="tools">
     <div class="container">
       <h2 class="section-title">Free Weight Loss Tools</h2>
