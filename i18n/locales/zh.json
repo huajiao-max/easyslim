@@ -1,0 +1,80 @@
+{
+  "header": {
+    "home": "首页",
+    "title": "轻松瘦身计划",
+    "login": "登录",
+    "features": "功能",
+    "pricing": "价格",
+    "contact": "联系我们"
+  },
+  "footer": {
+    "menuList": [
+      {
+        "title": "首页",
+        "name": "index",
+        "url": "/"
+      },
+      {
+        "title": "功能",
+        "name": "features",
+        "url": "/features"
+      },
+      {
+        "title": "价格",
+        "name": "pricing",
+        "url": "/pricing"
+      }
+    ],
+    "brand": {
+      "title": "轻松瘦身",
+      "description": "轻松瘦身计划 | 真正有效的简单减肥方案"
+    },
+    "copyright": "© 2025 EasySlimStart 版权所有",
+    "agreement": {
+      "title": "协议"
+    }
+  },
+  "heroData": {
+    "title": "欢迎",
+    "subtitle": "副标题文本"
+  },
+  "dialog": {
+    "logoutConfirm": "确定要退出登录吗？",
+    "logoutTitle": "确认退出",
+    "okButton": "确定",
+    "cancelButton": "取消",
+    "logoutSuccess": "退出成功！",
+    "loginFailed": "登录失败",
+    "selectLanguage": "选择语言",
+    "deleteConfirm": "确定要删除此计划吗？",
+    "deleteTitle": "确认删除"
+  },
+  "buttons": {
+    "delete": "删除",
+    "cancel": "取消",
+    "startPlan": "开始计划",
+    "savePlan": "保存计划"
+  },
+  "messages": {
+    "planDeleted": "计划删除成功"
+  },
+  "features": {
+    "titles": {
+      "diet": "个性化饮食计划",
+      "workout": "定制锻炼方案", 
+      "bmi": "BMI计算器"
+    },
+    "descriptions": {
+      "diet": "根据您的目标和偏好创建个性化饮食计划",
+      "workout": "适合您健身水平的定制锻炼方案",
+      "bmi": "计算您的BMI指数并跟踪进度"
+    }
+  },
+  "testimonial": {
+    "text": "这个减肥计划真的改变了我的生活！一个月内我减掉了10斤，而且感觉比以前更有活力了。",
+    "author": "李女士, 32岁"
+  },
+  "sectionTitles": {
+    "testimonials": "真实用户评价"
+  }
+}

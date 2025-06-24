@@ -2,7 +2,7 @@
   <!-- 用户反馈 -->
   <section class="success">
     <div class="container">
-      <h2 class="section-title">Real Results, Real People</h2>
+      <h2 class="section-title">{{ $t("sectionTitles.testimonials") }}</h2>
       <div class="testimonial">
         <p class="testimonial-text">{{ testimonial.text }}</p>
         <p class="testimonial-author">{{ testimonial.author }}</p>

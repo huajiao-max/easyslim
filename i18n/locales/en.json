@@ -1,4 +1,4 @@
-﻿{
+{
   "header": {
     "home": "Home",
     "title": "Easy Slim Plan", 
@@ -192,14 +192,5 @@
     "description": "Join thousands who have already started their journey. Your best summer transformation starts today!",
     "buttonText": "Get Started Free Today",
     "buttonLink": "weight_loss_planner_english.html"
-  },
-  "dialog": {
-    "logoutConfirm": "Do you want to log out?",
-    "logoutTitle": "Confirm Logout",
-    "okButton": "OK",
-    "cancelButton": "Cancel",
-    "logoutSuccess": "Logout successful!",
-    "loginFailed": "Login failed",
-    "selectLanguage": "Select Language"
   }
 }

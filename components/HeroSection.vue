@@ -5,11 +5,11 @@
 
     <section class="hero">
       <div class="hero-content">
-        <h1>{{ heroData.title }}</h1>
-        <p class="hero-subtitle">{{ heroData.subtitle }}</p>
-        <a :href="heroData.ctaLink" class="cta-button">{{
-          heroData.ctaText
-        }}</a>
+        <h1>{{ $t("hero.title") }}</h1>
+        <p class="hero-subtitle">{{ $t("hero.subtitle") }}</p>
+        <a :href="$t('hero.ctaLink')" class="cta-button">
+          {{ $t("hero.ctaText") }}
+        </a>
       </div>
     </section>
   </div>
@@ -21,12 +21,6 @@ import HeaderGlobal from "./headerglobal.vue";
 export default {
   components: {
     HeaderGlobal,
-  },
-  props: {
-    heroData: {
-      type: Object,
-      required: true,
-    },
   },
 };
 </script>
@@ -54,9 +48,9 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle fill="url(%23a)" cx="10" cy="10" r="10"/><circle fill="url(%23a)" cx="30" cy="5" r="8"/><circle fill="url(%23a)" cx="60" cy="15" r="6"/><circle fill="url(%23a)" cx="80" cy="8" r="12"/></svg>')
-    repeat;
-  animation: float 20s infinite linear;
+  /* background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle fill="url(%23a)" cx="10" cy="10" r="10"/><circle fill="url(%23a)" cx="30" cy="5" r="8"/><circle fill="url(%23a)" cx="60" cy="15" r="6"/><circle fill="url(%23a)" cx="80" cy="8" r="12"/></svg>')
+    repeat; */
+  /* animation: float 20s infinite linear; */
 }
 
 @keyframes float {

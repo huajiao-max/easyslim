@@ -226,6 +226,166 @@
           </div>
         </div>
       </el-dialog>
+      <el-dialog
+        v-model="calorieDeficitDialogVisible"
+        title="Calorie Deficit Calculator"
+        width="500px"
+      >
+        <div class="calculator">
+          <div class="tabs">
+            <div
+              class="tab"
+              :class="{ active: activeTab === 'deficit' }"
+              @click="activeTab = 'deficit'"
+            >
+              Deficit Calculator
+            </div>
+            <div
+              class="tab"
+              :class="{ active: activeTab === 'tracker' }"
+              @click="activeTab = 'tracker'"
+            >
+              Daily Tracker
+            </div>
+          </div>
+
+          <!-- Calorie Deficit Calculator -->
+          <div v-if="activeTab === 'deficit'" class="tab-content">
+            <div class="form-group">
+              <label>Gender:</label>
+              <select v-model="userGender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Age:</label>
+              <input
+                type="number"
+                v-model="userAge"
+                placeholder="30"
+                min="15"
+                max="100"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Height (cm):</label>
+              <input
+                type="number"
+                v-model="userHeight"
+                placeholder="170"
+                min="100"
+                max="250"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Weight (kg):</label>
+              <input
+                type="number"
+                v-model="userWeight"
+                placeholder="70"
+                min="30"
+                max="200"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Activity Level:</label>
+              <select v-model="userActivity">
+                <option value="1.2">Sedentary (little or no exercise)</option>
+                <option value="1.375">
+                  Lightly active (light exercise 1-3 days/week)
+                </option>
+                <option value="1.55">
+                  Moderately active (moderate exercise 3-5 days/week)
+                </option>
+                <option value="1.725">
+                  Very active (hard exercise 6-7 days/week)
+                </option>
+                <option value="1.9">
+                  Extra active (very hard exercise & physical job)
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Goal:</label>
+              <select v-model="userGoal">
+                <option value="-250">Mild weight loss (0.25 kg/week)</option>
+                <option value="-500">Moderate weight loss (0.5 kg/week)</option>
+                <option value="-750">Fast weight loss (0.75 kg/week)</option>
+                <option value="-1000">
+                  Aggressive weight loss (1 kg/week)
+                </option>
+              </select>
+            </div>
+
+            <button class="calculate-btn" @click="calculateDeficit">
+              Calculate My Deficit
+            </button>
+
+            <div v-if="deficitResult" class="result">
+              <h4>Your Calorie Needs</h4>
+              <p>
+                <strong>Maintenance:</strong>
+                {{ deficitResult.maintenance }} kcal/day
+              </p>
+              <p>
+                <strong>Target Intake:</strong>
+                {{ deficitResult.target }} kcal/day
+              </p>
+              <p>
+                <strong>Weekly Deficit:</strong>
+                {{ Math.abs(deficitResult.weeklyDeficit) }} kcal
+              </p>
+              <p>
+                <strong>Projected Weight Loss:</strong>
+                {{ deficitResult.projectedLoss }} kg/week
+              </p>
+            </div>
+          </div>
+
+          <!-- Daily Calorie Tracker -->
+          <div v-if="activeTab === 'tracker'" class="tab-content">
+            <div class="form-group">
+              <label>Daily Calorie Budget:</label>
+              <input type="number" v-model="dailyBudget" placeholder="1800" />
+            </div>
+
+            <div class="form-group">
+              <label>Food Consumed (kcal):</label>
+              <input type="number" v-model="foodConsumed" placeholder="0" />
+            </div>
+
+            <div class="form-group">
+              <label>Exercise Calories Burned (kcal):</label>
+              <input type="number" v-model="exerciseBurned" placeholder="0" />
+            </div>
+
+            <button class="calculate-btn" @click="calculateDailyBalance">
+              Calculate Daily Balance
+            </button>
+
+            <div v-if="dailyResult" class="result">
+              <h4>Daily Summary</h4>
+              <p>
+                <strong>Remaining Calories:</strong>
+                {{ dailyResult.remaining }} kcal
+              </p>
+              <p>
+                <strong>Current Deficit:</strong> {{ dailyResult.deficit }} kcal
+              </p>
+              <p>
+                <strong>Projected Weekly Deficit:</strong>
+                {{ dailyResult.weeklyProjection }} kcal
+              </p>
+            </div>
+          </div>
+        </div>
+      </el-dialog>
     </div>
   </section>
 </template>
@@ -363,6 +523,21 @@ export default {
           image: "/bread.png",
         },
       ],
+      calorieDeficitDialogVisible: false,
+      // Deficit Calculator
+      userGender: "male",
+      userAge: 30,
+      userHeight: 170,
+      userWeight: 70,
+      userActivity: "1.55",
+      userGoal: "-500",
+      deficitResult: null,
+
+      // Daily Tracker
+      dailyBudget: 1800,
+      foodConsumed: 0,
+      exerciseBurned: 0,
+      dailyResult: null,
     };
   },
   computed: {
@@ -394,8 +569,12 @@ export default {
 
           // this.mealDialogVisible = true;
           break;
+
         case "Progress Tracker":
           // TODO: Implement later
+          break;
+        case "Calorie Deficit Calculator":
+          this.calorieDeficitDialogVisible = true;
           break;
       }
     },
@@ -491,6 +670,45 @@ export default {
     selectFood(food) {
       this.$message.success(`Added ${food.name} to your meal plan`);
       // TODO: Implement meal plan logic
+    },
+    calculateDeficit() {
+      // Calculate BMR using Mifflin-St Jeor Equation
+      let bmr;
+      if (this.userGender === "male") {
+        bmr =
+          10 * this.userWeight + 6.25 * this.userHeight - 5 * this.userAge + 5;
+      } else {
+        bmr =
+          10 * this.userWeight +
+          6.25 * this.userHeight -
+          5 * this.userAge -
+          161;
+      }
+
+      // Calculate TDEE (Total Daily Energy Expenditure)
+      const tdee = bmr * parseFloat(this.userActivity);
+      const target = tdee + parseInt(this.userGoal);
+      const weeklyDeficit = parseInt(this.userGoal) * 7;
+      const projectedLoss = Math.abs(weeklyDeficit / 7700).toFixed(2); // 7700 kcal ≈ 1kg fat
+
+      this.deficitResult = {
+        maintenance: Math.round(tdee),
+        target: Math.round(target),
+        weeklyDeficit,
+        projectedLoss,
+      };
+    },
+
+    calculateDailyBalance() {
+      const remaining = this.dailyBudget - this.foodConsumed;
+      const deficit = remaining + this.exerciseBurned;
+      const weeklyProjection = deficit * 7;
+
+      this.dailyResult = {
+        remaining,
+        deficit,
+        weeklyProjection,
+      };
     },
   },
 };

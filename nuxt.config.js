@@ -1,23 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
+import path from "path";
 export default defineNuxtConfig({
   devServer: {
-    port: 3001,
+    port: 3002,
+    host: "0.0.0.0",
   },
   ssr: false,
-  app: {
-    baseURL: "/",
-    buildAssetsDir: "/_nuxt/",
-  },
-  nitro: {
-    preset: "vercel",
-    serveStatic: true,
-  },
-  publicRuntimeConfig: {
-    apiKey: process.env.API_KEY,
-    apiBaseUrl: process.env.API_BASE_URL,
-  },
-
   app: {
     baseURL: "/",
     buildAssetsDir: "/_nuxt/",
@@ -40,8 +29,10 @@ export default defineNuxtConfig({
         { name: "sogou_site_verification", content: "mXan3oISGM" },
         { name: "msvalidate.01", content: "9C1DEA3D90ADA14FDB750F862CEF56E8" },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-      link: [{ rel: "canonical", href: "https://www.easyslimstart.com/" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "canonical", href: "https://www.easyslimstart.com/" },
+      ],
       script: [
         // Temporarily disabled for debugging
         // {
@@ -51,6 +42,17 @@ export default defineNuxtConfig({
         // },
       ],
     },
+  },
+
+  nitro: {
+    preset: "vercel",
+    serveStatic: true,
+    compatibilityDate: "2025-06-22",
+  },
+
+  publicRuntimeConfig: {
+    apiKey: process.env.API_KEY,
+    apiBaseUrl: process.env.API_BASE_URL,
   },
 
   css: [
@@ -64,9 +66,11 @@ export default defineNuxtConfig({
     API_BASE_URL: process.env.API_BASE_URL || "https://kieai.erweima.ai/api/v1",
     API_KEY: process.env.API_KEY,
   },
+
   serverMiddleware: [
     { path: "/api", handler: "~/server-middleware/api-proxy" },
   ],
+
   privateRuntimeConfig: {
     apiKey: process.env.API_KEY,
   },
@@ -80,7 +84,68 @@ export default defineNuxtConfig({
   ],
 
   components: true,
-  modules: ["@nuxtjs/tailwindcss", "@element-plus/nuxt"],
+  //
+  modules: ["@nuxtjs/tailwindcss", "@element-plus/nuxt", "@nuxtjs/i18n"],
+  i18n: {
+    langDir: "locales",
+    locales: [
+      { code: "en", file: "en.json", name: "English" },
+      { code: "zh", file: "zh.json", name: "中文" },
+    ],
+
+    defaultLocale: "en",
+    strategy: "prefix_except_default",
+    lazy: false,
+    // langDir: "i18n/locales",
+    detectBrowserLanguage: false,
+    warnOnMissingTranslations: true,
+    hotReload: false,
+    bundle: {
+      optimizeTranslationDirective: false,
+      runtimeOnly: true,
+    },
+    compilation: {
+      strictMessage: false,
+      escapeHtml: false,
+    },
+    skipSettingLocaleOnNavigate: true,
+  },
+
+  // i18n: {
+  //   vueI18n: "@/i18n/nuxt-i18n.js",
+  //   locales: [
+  //     { code: "en", file: "en.json" },
+  //     { code: "zh", file: "zh-CN.json" },
+  //     { code: "zh-TW", file: "zh-TW.json" },
+  //     { code: "pt", file: "pt.json" },
+  //     { code: "de", file: "de.json" },
+  //     { code: "fr", file: "fr.json" },
+  //     { code: "es", file: "es.json" },
+  //     { code: "jp", file: "jp.json" },
+  //     { code: "ko", file: "ko.json" },
+  //   ],
+  //   defaultLocale: "en",
+  //   strategy: "prefix_except_default",
+  //   lazy: true,
+  //   langDir: "locales/languages/",
+  //   skipSettingLocaleOnNavigate: true,
+  //   baseUrl: process.env.BASE_URL || "http://localhost:3000",
+  //   detectBrowserLanguage: {
+  //     useCookie: true,
+  //     cookieKey: "i18n_redirected",
+  //     redirectOn: "root",
+  //     alwaysRedirect: true,
+  //   },
+  //   compilation: {
+  //     strictMessage: false,
+  //     escapeHtml: false,
+  //   },
+  //   bundle: {
+  //     fullInstall: false,
+  //     runtimeOnly: true,
+  //     optimizeTranslationDirective: false,
+  //   },
+  // },
 
   build: {
     transpile: [/^element-plus/],
@@ -108,4 +173,11 @@ export default defineNuxtConfig({
   generate: {
     fallback: true,
   },
+  // postcss: {
+  //   plugins: {
+  //     tailwindcss: {}, // 如果你用 TailwindCSS
+  //     autoprefixer: {},
+  //     // 其他 PostCSS 插件...
+  //   },
+  // },
 });
