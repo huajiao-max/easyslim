@@ -1,7 +1,7 @@
 
 // @ts-nocheck
-import locale_en_46json_b065f62b from "#nuxt-i18n/b065f62b";
-import locale_zh_46json_7a888465 from "#nuxt-i18n/7a888465";
+import locale_en_46json_e4bdebe4 from "#nuxt-i18n/e4bdebe4";
+import locale_zh_46json_b7c21a8a from "#nuxt-i18n/b7c21a8a";
 
 export const localeCodes =  [
   "en",
@@ -11,15 +11,15 @@ export const localeCodes =  [
 export const localeLoaders = {
   en: [
     {
-      key: "locale_en_46json_b065f62b",
-      load: () => Promise.resolve(locale_en_46json_b065f62b),
+      key: "locale_en_46json_e4bdebe4",
+      load: () => Promise.resolve(locale_en_46json_e4bdebe4),
       cache: true
     }
   ],
   zh: [
     {
-      key: "locale_zh_46json_7a888465",
-      load: () => Promise.resolve(locale_zh_46json_7a888465),
+      key: "locale_zh_46json_b7c21a8a",
+      load: () => Promise.resolve(locale_zh_46json_b7c21a8a),
       cache: true
     }
   ]
@@ -60,7 +60,7 @@ export const nuxtI18nOptions = {
       name: "English",
       files: [
         {
-          path: "D:/mycode/2025/cursor/month-plan-nuxt/i18n/locales/en.json",
+          path: "D:/mycommonCode/2025/easyslim/i18n/locales/en.json",
           cache: undefined
         }
       ]
@@ -70,7 +70,7 @@ export const nuxtI18nOptions = {
       name: "中文",
       files: [
         {
-          path: "D:/mycode/2025/cursor/month-plan-nuxt/i18n/locales/zh.json",
+          path: "D:/mycommonCode/2025/easyslim/i18n/locales/zh.json",
           cache: undefined
         }
       ]
@@ -106,7 +106,7 @@ export const normalizedLocales = [
     name: "English",
     files: [
       {
-        path: "D:/mycode/2025/cursor/month-plan-nuxt/i18n/locales/en.json",
+        path: "D:/mycommonCode/2025/easyslim/i18n/locales/en.json",
         cache: undefined
       }
     ]
@@ -116,7 +116,7 @@ export const normalizedLocales = [
     name: "中文",
     files: [
       {
-        path: "D:/mycode/2025/cursor/month-plan-nuxt/i18n/locales/zh.json",
+        path: "D:/mycommonCode/2025/easyslim/i18n/locales/zh.json",
         cache: undefined
       }
     ]

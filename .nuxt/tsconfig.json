@@ -140,10 +140,10 @@
         "../node_modules/@nuxtjs/i18n/dist/types"
       ],
       "#nuxt-i18n/logger": [
-        "./nuxt-i18n-logger"
+        "./nuxt-i18n-logger.mjs"
       ],
       "#app-manifest": [
-        "./manifest/meta/dev"
+        "./manifest/meta/dev.json"
       ],
       "#components": [
         "./components"

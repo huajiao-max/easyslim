@@ -8,6 +8,19 @@
         </p>
         <p class="text footertitle">© 2025 All Rights Reserved</p>
       </div>
+        <div>
+        <p class="text footerlogo" >Friendship support</p>
+
+        <p class="text footertitle">
+          <a href="https://ghibli.best/" target="_blank">Ghibli Ai</a>
+        </p>
+        <p class="text footertitle">
+          <a href="https://www.easy4cut.xyz" target="_blank">Easy4cut</a>
+        </p>
+             <p class="text footertitle">
+          <a href="https://www.projectsekaisticker.online" target="_blank">Project Sekei Sticker</a>
+        </p>
+      </div>
       <div>
         <p class="text footerlogo">Legal</p>
         <p class="text footertitle">
