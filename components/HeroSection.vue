@@ -26,12 +26,10 @@ export default {
 </script>
 
 <style scoped>
-.main-box {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
+
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #70e0c0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +84,8 @@ export default {
 
 .cta-button {
   display: inline-block;
-  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  background:#5bccaa;
+
   color: white;
   padding: 1rem 2.5rem;
   text-decoration: none;

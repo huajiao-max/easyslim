@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     baseURL: "/",
     buildAssetsDir: "/_nuxt/",
     head: {
-      title: "Easy Slim Planner | Simple Weight Loss Plans That Actually Work",
+      title: "TinyMint | Simple Weight Loss Plans That Actually Work",
       htmlAttrs: {
         lang: "en",
       },

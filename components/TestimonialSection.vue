@@ -2,7 +2,7 @@
   <!-- 用户反馈 -->
   <section class="success">
     <div class="container">
-      <h2 class="section-title">{{ $t("sectionTitles.testimonials") }}</h2>
+      <h2 class="section-title">{{ $t("testimonial.author") }}</h2>
       <div class="testimonial">
         <p class="testimonial-text">{{ testimonial.text }}</p>
         <p class="testimonial-author">{{ testimonial.author }}</p>
@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .success {
   padding: 5rem 0;
-  background: #fff;
+  background: #70e0c0;
 }
 
 .testimonial {
@@ -33,8 +33,8 @@ export default {
   margin: 0 auto;
   text-align: center;
   padding: 3rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  background: #fff;
+  color: #333;
   border-radius: 20px;
   position: relative;
   opacity: 0;
@@ -49,6 +49,7 @@ export default {
   top: -1rem;
   left: 2rem;
   opacity: 0.3;
+  color: #70e0c0;
 }
 
 .testimonial-text {

@@ -571,7 +571,7 @@ export default {
           break;
 
         case "Progress Tracker":
-          // TODO: Implement later
+          this.$router.push('/progress-tracker');
           break;
         case "Calorie Deficit Calculator":
           this.calorieDeficitDialogVisible = true;
@@ -757,8 +757,8 @@ export default {
 
 .tools {
   padding: 5rem 0;
-  background: #2c3e50;
-  color: white;
+  background: #fff;
+  color: #333;
 }
 
 .tools-grid {
@@ -768,21 +768,22 @@ export default {
 }
 
 .tool-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: #f8f9fa;
   padding: 2rem;
   border-radius: 15px;
   text-align: center;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #e9ecef;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
   animation: slideInUp 0.6s ease forwards;
+  cursor: pointer;
 }
 
 .tool-card:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #e9ecef;
   transform: translateY(-5px);
+  border-color: #6aa4c3;
 }
 
 .tool-icon {
@@ -842,7 +843,7 @@ export default {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: #6aa4c3;
 }
 
 .form-row {
@@ -854,7 +855,7 @@ export default {
 .calculate-btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #4caf50, #45a049);
+  background: #6aa4c3;
   color: white;
   border: none;
   border-radius: 8px;
@@ -867,12 +868,12 @@ export default {
 
 .calculate-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 5px 15px rgba(106, 164, 195, 0.4);
 }
 
 .result {
   background: #f0f8f0;
-  border: 2px solid #4caf50;
+  border: 2px solid #6aa4c3;
   border-radius: 8px;
   padding: 15px;
   margin-top: 15px;
@@ -938,7 +939,7 @@ export default {
 }
 
 .tab.active {
-  background: #4caf50;
+  background: #6aa4c3;
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

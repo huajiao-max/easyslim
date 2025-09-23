@@ -1,7 +1,7 @@
 <template>
   <section class="plans" id="plans">
     <div class="container">
-      <h2 class="section-title" style="color: white">
+      <h2 class="section-title" style="color: #333">
         Choose Your Perfect Plan
       </h2>
       <div class="plans-grid">
@@ -39,7 +39,8 @@ export default {
 <style scoped>
 .plans {
   padding: 5rem 0;
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+   background: linear-gradient(135deg, #a9c89a 0%, #caefa5 100%);
+
 }
 
 .plans-grid {

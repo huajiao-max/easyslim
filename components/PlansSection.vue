@@ -2,7 +2,7 @@
   <!-- 选择你的减肥计划 -->
   <section class="plans" id="plans">
     <div class="container">
-      <h2 class="section-title" style="color: white">
+      <h2 class="section-title" style="color: #333">
         Choose Your Weight Loss Plan 💪
       </h2>
       <div class="plans-grid">
@@ -26,7 +26,7 @@
 
       <!-- Saved Plans Section -->
       <div class="saved-plans-section" v-if="savedPlans.length > 0">
-        <h2 class="section-title" style="color: white; margin-top: 3rem">
+        <h2 class="section-title" style="color: #333; margin-top: 3rem">
           📋 My Plan Collection
         </h2>
         <div class="saved-plans-grid">
@@ -856,7 +856,7 @@ export default {
 <style scoped>
 .plans {
   padding: 5rem 0;
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  background: #70e0c0;
 }
 
 .section-title {
@@ -960,7 +960,7 @@ export default {
 }
 
 .plan-cta {
-  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  background: #70e0c0;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -1571,7 +1571,7 @@ export default {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #74ebd5, #acb6e5);
+  background: #70e0c0;
   border-radius: 16px 16px 0 0;
 }
 
@@ -1624,15 +1624,15 @@ export default {
 
 /* Start Plan 按钮 */
 .start-btn {
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  background: #70e0c0;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .start-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(116, 235, 213, 0.4),
-    0 4px 12px rgba(172, 182, 229, 0.3);
+  box-shadow: 0 8px 25px rgba(112, 224, 192, 0.4),
+    0 4px 12px rgba(112, 224, 192, 0.3);
 }
 
 .start-btn:active {

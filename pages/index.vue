@@ -226,7 +226,7 @@ body {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 3rem;
-  color: #fff;
+  color: #333;
 }
 
 @media (max-width: 768px) {

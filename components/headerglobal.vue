@@ -15,6 +15,15 @@
             </h2>
           </div>
 
+          <div class="nav-menu">
+            <nuxt-link to="/" class="nav-link" :class="{ active: $route.path === '/' }">
+              首页
+            </nuxt-link>
+            <nuxt-link to="/progress-tracker" class="nav-link" :class="{ active: $route.path === '/progress-tracker' }">
+              体重追踪
+            </nuxt-link>
+          </div>
+
           <div
             class="right-login"
             @click="handleGoogleLogin"
@@ -162,7 +171,7 @@ function tohome() {
   justify-content: space-between;
   padding: 0 20px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
   z-index: 1000;
@@ -178,7 +187,7 @@ function tohome() {
     display: flex;
     align-items: center;
     cursor: pointer;
-    width: 85%;
+    width: auto;
     .sidebar-logo {
       width: 40px;
       height: 40px;
@@ -188,7 +197,7 @@ function tohome() {
     .sidebar-title {
       font-size: 18px;
       font-weight: 600;
-      color: #333;
+      color: #000;
       margin: 0;
     }
     img {
@@ -196,9 +205,49 @@ function tohome() {
     }
   }
 
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: 3rem;
+  }
+
+  .nav-link {
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav-link:hover {
+    color: #70e0c0;
+    background: rgba(112, 224, 192, 0.1);
+  }
+
+  .nav-link.active {
+    color: #70e0c0;
+    font-weight: 600;
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #70e0c0;
+    border-radius: 50%;
+  }
+
   .right-login {
     padding: 8px 16px;
-    background: #409eff;
+    background: #6aa4c3;
     color: white;
     border-radius: 4px;
     cursor: pointer;
@@ -207,7 +256,7 @@ function tohome() {
     margin-left: 10px;
 
     &:hover {
-      background: #66b1ff;
+      background: #5890af;
     }
   }
 
@@ -225,6 +274,33 @@ function tohome() {
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-logo-container {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 60px;
+  }
+
+  .sidebar-logo-link {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nav-menu {
+    width: 100%;
+    order: 3;
+    margin-left: 0;
+    justify-content: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    padding: 0.4rem 0.8rem;
   }
 }
 </style>

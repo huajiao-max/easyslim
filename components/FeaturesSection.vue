@@ -35,7 +35,7 @@ export default {
 <style scoped>
 .features {
   padding: 5rem 0;
-  background: #f8f9fa;
+  background: #fff;
 }
 
 .features-grid {
@@ -66,7 +66,7 @@ export default {
   left: -100%;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: #70e0c0;
   transition: left 0.5s ease;
 }
 

@@ -2,9 +2,9 @@
   <div class="box">
     <div class="flex">
       <div>
-        <p class="text footerlogo">Easy Slim Start</p>
+        <p class="text footerlogo">TinyMint</p>
         <p class="text footertitle">
-          Easy Slim Planner | Simple Weight Loss Plans That Actually Work
+          TinyMint | Simple Weight Loss Plans That Actually Work
         </p>
         <p class="text footertitle">© 2025 All Rights Reserved</p>
       </div>
@@ -16,6 +16,9 @@
         </p>
         <p class="text footertitle">
           <a href="https://www.easy4cut.xyz" target="_blank">Easy4cut</a>
+        </p>
+            <p class="text footertitle">
+          <a href="https://wplace.cafe" target="_blank">Wplace Paint Tool</a>
         </p>
              <p class="text footertitle">
           <a href="https://www.projectsekaisticker.online" target="_blank">Project Sekei Sticker</a>
@@ -38,8 +41,8 @@
 <style scoped lang="less">
 .box {
   margin-top: 10rem;
-  color: #fff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #000;
+  background: #fff;
 }
 .flex {
   display: flex;
@@ -51,7 +54,7 @@
   font-size: 12px;
 }
 .text:hover {
-  color: rgb(255 255 255);
+  color: #000;
   opacity: 0.8;
 }
 .svg {
@@ -74,7 +77,7 @@
     text-decoration: none;
   }
   a:hover {
-    color: rgba(248, 113, 113, 1);
+    color: #6aa4c3;
   }
 }
 @media (min-width: 340px) and (max-width: 1285px) {
