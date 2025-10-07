@@ -23,6 +23,15 @@
              <p class="text footertitle">
           <a href="https://www.projectsekaisticker.online" target="_blank">Project Sekei Sticker</a>
         </p>
+             <p class="text footertitle">
+          <a href="https://www.thwordle.site/" target="_blank">Thwordle</a>
+        </p>
+            <p class="text footertitle">
+          <a href="https://www.sora2-ai.studio/" target="_blank">Sora2</a>
+        </p>
+            <p class="text footertitle">
+          <a href="https://sorasync.online/" target="_blank">sorasync</a>
+        </p>
       </div>
       <div>
         <p class="text footerlogo">Legal</p>
