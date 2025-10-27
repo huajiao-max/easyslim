@@ -17,10 +17,13 @@
 
           <div class="nav-menu">
             <nuxt-link to="/" class="nav-link" :class="{ active: $route.path === '/' }">
-              首页
+             Home
             </nuxt-link>
             <nuxt-link to="/progress-tracker" class="nav-link" :class="{ active: $route.path === '/progress-tracker' }">
-              体重追踪
+            Weight tracking
+            </nuxt-link>
+                 <nuxt-link to="/weight-loss-videos" class="nav-link" :class="{ active: $route.path === '/weight-loss-videos' }">
+           Weight Loss Videos
             </nuxt-link>
           </div>
 

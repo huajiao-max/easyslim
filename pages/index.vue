@@ -166,10 +166,10 @@ export default {
             "Visual monthly tracking to keep you motivated and on track with your goals.",
         },
         {
-          icon: "🥘",
-          title: "Meal Planner",
-          description:
-            "Plan your meals with our easy-to-use interface, from healthy Bánh mì alternatives to balanced daily menus.",
+         
+"icon": "🎬",
+"title": "Weight Loss Videos",
+"description": "Explore a vast collection of weight loss videos, from high-intensity fat-burning workouts to healthy eating guides, providing comprehensive inspiration and solutions for your fitness journey."
         },
       ],
       testimonial: {
